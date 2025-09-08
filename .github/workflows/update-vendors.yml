@@ -8,6 +8,7 @@ on:
 jobs:
   update-vendors:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -16,9 +17,12 @@ jobs:
         env:
           SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL }}
         run: |
+          set -e
+          mkdir -p data
+          echo "Fetching CSV from $SHEET_CSV_URL"
           curl -s "$SHEET_CSV_URL" -o data/vendors.csv
           python3 - <<'PY'
-import csv, json, sys
+import csv, json
 rows = []
 with open('data/vendors.csv', newline='', encoding='utf-8') as f:
     reader = csv.DictReader(f)
@@ -31,8 +35,9 @@ PY
       - name: Generate changes.json (compare with previous)
         run: |
           python3 - <<'PY'
-import json, os
-def load(p): return json.load(open(p)) if os.path.exists(p) else []
+import json, os, shutil
+def load(p): 
+    return json.load(open(p, encoding='utf-8')) if os.path.exists(p) else []
 new = load('data/vendors.json')
 old = load('data/vendors.json.old') if os.path.exists('data/vendors.json.old') else []
 changes = []
@@ -46,13 +51,15 @@ for r in new:
     else:
         changes.append(f"New plan: {r.get('Vendor')} - {r.get('Plan Name')}")
 open('data/changes.json','w',encoding='utf-8').write(json.dumps(changes,ensure_ascii=False,indent=2))
-if os.path.exists('data/vendors.json'): open('data/vendors.json.old','w',encoding='utf-8').write(json.dumps(new,ensure_ascii=False,indent=2))
+# keep a copy for next run
+if os.path.exists('data/vendors.json'):
+    shutil.copyfile('data/vendors.json','data/vendors.json.old')
 PY
 
       - name: Commit
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add data/vendors.json data/changes.json
+          git add data/vendors.json data/changes.json || true
           git commit -m "Update vendors and changes" || echo "No changes"
-          git push
+          git push || echo "Push failed"
