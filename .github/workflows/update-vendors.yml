@@ -21,7 +21,7 @@ jobs:
           mkdir -p data
           echo "Fetching CSV from $SHEET_CSV_URL"
           curl -s "$SHEET_CSV_URL" -o data/vendors.csv
-          python3 <<'PY'
+          python3 -c "
 import csv, json
 rows = []
 with open('data/vendors.csv', newline='', encoding='utf-8') as f:
@@ -30,11 +30,11 @@ with open('data/vendors.csv', newline='', encoding='utf-8') as f:
         rows.append(r)
 with open('data/vendors.json','w',encoding='utf-8') as fh:
     json.dump(rows, fh, ensure_ascii=False, indent=2)
-PY
+"
 
       - name: Generate changes.json (compare with previous)
         run: |
-          python3 <<'PY'
+          python3 -c "
 import json, os, shutil
 
 def load(p):
@@ -43,26 +43,26 @@ def load(p):
 new = load('data/vendors.json')
 old = load('data/vendors_prev.json')
 
-changes = {"added": [], "removed": [], "updated": []}
+changes = {'added': [], 'removed': [], 'updated': []}
 
-old_map = {o.get("Vendor"): o for o in old}
-new_map = {n.get("Vendor"): n for n in new}
+old_map = {o.get('Vendor'): o for o in old}
+new_map = {n.get('Vendor'): n for n in new}
 
 for v in new_map:
     if v not in old_map:
-        changes["added"].append(new_map[v])
+        changes['added'].append(new_map[v])
     elif new_map[v] != old_map[v]:
-        changes["updated"].append(new_map[v])
+        changes['updated'].append(new_map[v])
 
 for v in old_map:
     if v not in new_map:
-        changes["removed"].append(old_map[v])
+        changes['removed'].append(old_map[v])
 
 with open('data/changes.json','w',encoding='utf-8') as fh:
     json.dump(changes, fh, ensure_ascii=False, indent=2)
 
 shutil.copy('data/vendors.json', 'data/vendors_prev.json')
-PY
+"
 
       - name: Commit and Push
         run: |
