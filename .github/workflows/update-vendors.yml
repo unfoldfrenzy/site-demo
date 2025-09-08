@@ -21,7 +21,7 @@ jobs:
           mkdir -p data
           echo "Fetching CSV from $SHEET_CSV_URL"
           curl -s "$SHEET_CSV_URL" -o data/vendors.csv
-          python3 - <<'PY'
+          python3 <<'PY'
 import csv, json
 rows = []
 with open('data/vendors.csv', newline='', encoding='utf-8') as f:
@@ -34,32 +34,40 @@ PY
 
       - name: Generate changes.json (compare with previous)
         run: |
-          python3 - <<'PY'
+          python3 <<'PY'
 import json, os, shutil
-def load(p): 
+
+def load(p):
     return json.load(open(p, encoding='utf-8')) if os.path.exists(p) else []
+
 new = load('data/vendors.json')
-old = load('data/vendors.json.old') if os.path.exists('data/vendors.json.old') else []
-changes = []
-old_map = {(r.get('Vendor'), r.get('Plan Name')): r for r in old}
-for r in new:
-    key = (r.get('Vendor'), r.get('Plan Name'))
-    o = old_map.get(key)
-    if o:
-        if o.get('Price (₹/mo)') != r.get('Price (₹/mo)'):
-            changes.append(f"Price change: {r.get('Vendor')} {r.get('Plan Name')} {o.get('Price (₹/mo)')} -> {r.get('Price (₹/mo)')}")
-    else:
-        changes.append(f"New plan: {r.get('Vendor')} - {r.get('Plan Name')}")
-open('data/changes.json','w',encoding='utf-8').write(json.dumps(changes,ensure_ascii=False,indent=2))
-# keep a copy for next run
-if os.path.exists('data/vendors.json'):
-    shutil.copyfile('data/vendors.json','data/vendors.json.old')
+old = load('data/vendors_prev.json')
+
+changes = {"added": [], "removed": [], "updated": []}
+
+old_map = {o.get("Vendor"): o for o in old}
+new_map = {n.get("Vendor"): n for n in new}
+
+for v in new_map:
+    if v not in old_map:
+        changes["added"].append(new_map[v])
+    elif new_map[v] != old_map[v]:
+        changes["updated"].append(new_map[v])
+
+for v in old_map:
+    if v not in new_map:
+        changes["removed"].append(old_map[v])
+
+with open('data/changes.json','w',encoding='utf-8') as fh:
+    json.dump(changes, fh, ensure_ascii=False, indent=2)
+
+shutil.copy('data/vendors.json', 'data/vendors_prev.json')
 PY
 
-      - name: Commit
+      - name: Commit and Push
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add data/vendors.json data/changes.json || true
-          git commit -m "Update vendors and changes" || echo "No changes"
-          git push || echo "Push failed"
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add data/
+          git commit -m "Auto-update vendors.json and changes.json" || echo "No changes"
+          git push
