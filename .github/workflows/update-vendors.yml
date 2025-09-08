@@ -21,7 +21,7 @@ jobs:
           mkdir -p data
           echo "Fetching CSV from $SHEET_CSV_URL"
           curl -s "$SHEET_CSV_URL" -o data/vendors.csv
-          python3 -c "
+          python3 <<'PY'
 import csv, json
 rows = []
 with open('data/vendors.csv', newline='', encoding='utf-8') as f:
@@ -30,11 +30,11 @@ with open('data/vendors.csv', newline='', encoding='utf-8') as f:
         rows.append(r)
 with open('data/vendors.json','w',encoding='utf-8') as fh:
     json.dump(rows, fh, ensure_ascii=False, indent=2)
-"
+PY
 
       - name: Generate changes.json (compare with previous)
         run: |
-          python3 -c "
+          python3 <<'PY'
 import json, os, shutil
 
 def load(p):
@@ -62,7 +62,7 @@ with open('data/changes.json','w',encoding='utf-8') as fh:
     json.dump(changes, fh, ensure_ascii=False, indent=2)
 
 shutil.copy('data/vendors.json', 'data/vendors_prev.json')
-"
+PY
 
       - name: Commit and Push
         run: |
