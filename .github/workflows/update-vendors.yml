@@ -1,0 +1,58 @@
+name: Update Vendors from Sheet
+
+on:
+  schedule:
+    - cron: '0 3 * * *' # daily 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update-vendors:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Fetch published CSV (Vendors)
+        env:
+          SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL }}
+        run: |
+          curl -s "$SHEET_CSV_URL" -o data/vendors.csv
+          python3 - <<'PY'
+import csv, json, sys
+rows = []
+with open('data/vendors.csv', newline='', encoding='utf-8') as f:
+    reader = csv.DictReader(f)
+    for r in reader:
+        rows.append(r)
+with open('data/vendors.json','w',encoding='utf-8') as fh:
+    json.dump(rows, fh, ensure_ascii=False, indent=2)
+PY
+
+      - name: Generate changes.json (compare with previous)
+        run: |
+          python3 - <<'PY'
+import json, os
+def load(p): return json.load(open(p)) if os.path.exists(p) else []
+new = load('data/vendors.json')
+old = load('data/vendors.json.old') if os.path.exists('data/vendors.json.old') else []
+changes = []
+old_map = {(r.get('Vendor'), r.get('Plan Name')): r for r in old}
+for r in new:
+    key = (r.get('Vendor'), r.get('Plan Name'))
+    o = old_map.get(key)
+    if o:
+        if o.get('Price (₹/mo)') != r.get('Price (₹/mo)'):
+            changes.append(f"Price change: {r.get('Vendor')} {r.get('Plan Name')} {o.get('Price (₹/mo)')} -> {r.get('Price (₹/mo)')}")
+    else:
+        changes.append(f"New plan: {r.get('Vendor')} - {r.get('Plan Name')}")
+open('data/changes.json','w',encoding='utf-8').write(json.dumps(changes,ensure_ascii=False,indent=2))
+if os.path.exists('data/vendors.json'): open('data/vendors.json.old','w',encoding='utf-8').write(json.dumps(new,ensure_ascii=False,indent=2))
+PY
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/vendors.json data/changes.json
+          git commit -m "Update vendors and changes" || echo "No changes"
+          git push
