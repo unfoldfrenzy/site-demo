@@ -1,0 +1,50 @@
+name: Generate Benchmark Pages
+
+on:
+  push:
+    paths:
+      - "data/vendors.json"
+      - "benchmark/template.html"
+  workflow_dispatch:
+
+jobs:
+  build-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Generate Pages
+        run: |
+          mkdir -p benchmark
+          vendors=$(jq -c '.[]' data/vendors.json)
+          template=$(cat benchmark/template.html)
+          for vendor in $vendors; do
+            id=$(echo "$vendor" | jq -r '.id')
+            name=$(echo "$vendor" | jq -r '.name')
+            logo=$(echo "$vendor" | jq -r '.logo')
+            summary=$(echo "$vendor" | jq -r '.summary')
+            website=$(echo "$vendor" | jq -r '.website')
+            base=$(echo "$vendor" | jq -r '.pricing.base_price')
+            per=$(echo "$vendor" | jq -r '.pricing.per_employee')
+            notes=$(echo "$vendor" | jq -r '.pricing.notes')
+            features=$(echo "$vendor" | jq -r '.features[]' | sed 's/^/<li>/' | sed 's/$/<\/li>/' | tr '\n' ' ')
+            page="$template"
+            page="${page//\{\{id\}\}/$id}"
+            page="${page//\{\{name\}\}/$name}"
+            page="${page//\{\{logo\}\}/$logo}"
+            page="${page//\{\{summary\}\}/$summary}"
+            page="${page//\{\{website\}\}/$website}"
+            page="${page//\{\{base_price\}\}/$base}"
+            page="${page//\{\{per_employee\}\}/$per}"
+            page="${page//\{\{notes\}\}/$notes}"
+            page="${page//\{\{features_list\}\}/$features}"
+            echo "$page" > "benchmark/${id}.html"
+          done
+      - name: Commit pages
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add benchmark/*.html || true
+          git commit -m "Generated vendor pages" || echo "No changes"
+          git push || echo "Push failed"

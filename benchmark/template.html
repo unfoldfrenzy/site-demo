@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{name}} – Payroll Benchmark</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <a href="/benchmark/">← Back to all vendors</a>
+    <h1>{{name}}</h1>
+    <img src="{{logo}}" class="logo-large" alt="{{name}} logo" />
+    <p>{{summary}}</p>
+    <h2>Pricing</h2>
+    <ul>
+      <li>Base Price: {{base_price}}</li>
+      <li>Per Employee: {{per_employee}}</li>
+      <li>Notes: {{notes}}</li>
+    </ul>
+    <h2>Features</h2>
+    <ul>
+      {{features_list}}
+    </ul>
+    <p><a href="{{website}}" target="_blank">Visit Website</a></p>
+  </div>
+</body>
+</html>

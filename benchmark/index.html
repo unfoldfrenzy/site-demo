@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Payroll SaaS Benchmark</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script defer src="/assets/scripts/filters.js"></script>
+</head>
+<body class="bg-gray-50">
+  <header class="p-6 bg-white shadow-sm">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Payroll SaaS Benchmark (India)</h1>
+      <a href="/" class="text-blue-600 hover:underline">← Home</a>
+    </div>
+  </header>
+  <main class="max-w-6xl mx-auto mt-10 px-4">
+    <section class="bg-white p-6 rounded-xl shadow-sm mb-8">
+      <h2 class="text-xl font-semibold mb-4">Filters</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <label class="font-medium">Max Price (₹)</label>
+          <input type="range" id="priceFilter" min="0" max="5000" value="5000" class="w-full mt-2"/>
+          <p class="text-sm text-gray-600">Up to <span id="priceValue">5000</span> / month</p>
+        </div>
+        <div>
+          <label class="font-medium">Employee Size</label>
+          <select id="employeeFilter" class="w-full border rounded-lg px-3 py-2 mt-2">
+            <option value="any">Any</option>
+            <option value="20">Up to 20</option>
+            <option value="50">Up to 50</option>
+            <option value="100">Up to 100</option>
+            <option value="500">Up to 500</option>
+          </select>
+        </div>
+        <div>
+          <label class="font-medium">Must Have Feature</label>
+          <select id="featureFilter" class="w-full border rounded-lg px-3 py-2 mt-2">
+            <option value="any">Any</option>
+            <option value="Payroll">Payroll</option>
+            <option value="Leave">Leave Management</option>
+            <option value="Attendance">Attendance</option>
+            <option value="Compliance">Compliance</option>
+            <option value="Performance">Performance</option>
+          </select>
+        </div>
+      </div>
+    </section>
+    <section id="vendorGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></section>
+  </main>
+</body>
+</html>

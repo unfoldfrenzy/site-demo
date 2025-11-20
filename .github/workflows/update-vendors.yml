@@ -1,0 +1,49 @@
+name: Update Vendors from Sheet
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-vendors:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Fetch vendors CSV and convert to JSON
+        env:
+          SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL }}
+        run: |
+          set -e
+          mkdir -p data
+          echo "Downloading CSV from $SHEET_CSV_URL"
+          curl -s "$SHEET_CSV_URL" -o data/vendors.csv
+          python3 << 'PY'
+import csv, json
+rows = []
+with open('data/vendors.csv', newline='', encoding='utf-8') as f:
+    reader = csv.DictReader(f)
+    for r in reader:
+        vendor = {
+            "id": (r.get('Vendor') or r.get('vendor') or '').strip().lower().replace(' ', '-'),
+            "name": r.get('Vendor') or r.get('vendor') or '',
+            "website": r.get('Website') or r.get('website') or '',
+            "pricing": {"base_price": r.get('Price') or r.get('price') or '', "per_employee": r.get('Pricing Model') or r.get('pricing model') or '', "notes": r.get('Notes') or ''},
+            "features": [f.strip() for f in (r.get('Features') or r.get('features') or '').split(',') if f.strip()],
+            "summary": r.get('Description') or '',
+            "logo": r.get('LogoURL') or r.get('logourl') or ''
+        }
+        rows.append(vendor)
+with open('data/vendors.json','w',encoding='utf-8') as fh:
+    json.dump(rows, fh, ensure_ascii=False, indent=2)
+PY
+
+      - name: Commit vendors.json
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add data/vendors.json || true
+          git commit -m "Update vendors.json from sheet" || echo "No changes"
+          git push || echo "Push failed"

@@ -1,0 +1,192 @@
+[
+  {
+    "id": "greyt",
+    "name": "greytHR",
+    "website": "https://www.greythr.com/",
+    "pricing": {
+      "base_price": "₹349/month",
+      "per_employee": "₹20 per employee",
+      "notes": "Pricing may vary for custom plans."
+    },
+    "features": [
+      "Payroll automation",
+      "Leave & attendance",
+      "Expense claims",
+      "Mobile app",
+      "Compliance reports"
+    ],
+    "summary": "A popular payroll & HR platform for Indian SMEs with strong automation.",
+    "logo": "/assets/vendors/greyt.png"
+  },
+  {
+    "id": "keka",
+    "name": "Keka HR",
+    "website": "https://www.keka.com/",
+    "pricing": {
+      "base_price": "₹6,000/year",
+      "per_employee": "Custom beyond 50 employees",
+      "notes": "Yearly pricing for small teams."
+    },
+    "features": [
+      "Payroll",
+      "HRIS",
+      "Performance",
+      "Timesheets",
+      "Recruitment"
+    ],
+    "summary": "A modern HRMS with rich analytics and powerful employee experience tooling.",
+    "logo": "/assets/vendors/keka.png"
+  },
+  {
+    "id": "zoho",
+    "name": "Zoho Payroll",
+    "website": "https://www.zoho.com/payroll/",
+    "pricing": {
+      "base_price": "₹50/employee",
+      "per_employee": "₹50 per employee",
+      "notes": "Transparent pricing across India."
+    },
+    "features": [
+      "Payroll processing",
+      "Compliance automation",
+      "Employee portal",
+      "Bank integrations",
+      "Zoho suite integrations"
+    ],
+    "summary": "Simple, transparent payroll designed for smaller teams and Zoho users.",
+    "logo": "/assets/vendors/zoho.png"
+  },
+  {
+    "id": "sumhr",
+    "name": "sumHR",
+    "website": "https://www.sumhr.com/",
+    "pricing": {
+      "base_price": "₹49/employee",
+      "per_employee": "₹49 per employee",
+      "notes": "Free trial available."
+    },
+    "features": [
+      "Payroll",
+      "HRIS",
+      "ESS portal",
+      "Leave management",
+      "Time tracking"
+    ],
+    "summary": "A lightweight HR & payroll tool for startups & growing teams.",
+    "logo": "/assets/vendors/sumhr.png"
+  },
+  {
+    "id": "hro",
+    "name": "HR-One",
+    "website": "https://www.hrone.cloud/",
+    "pricing": {
+      "base_price": "₹85/employee",
+      "per_employee": "₹85 per employee",
+      "notes": "Popular for mid-sized companies."
+    },
+    "features": [
+      "Payroll",
+      "Asset management",
+      "HR workflows",
+      "Attendance",
+      "Mobile app"
+    ],
+    "summary": "Cloud HR software with strong workflow management and audit features.",
+    "logo": "/assets/vendors/hrone.png"
+  },
+  {
+    "id": "zeta",
+    "name": "Zeta HRMS",
+    "website": "https://www.zetahr.com/",
+    "pricing": {
+      "base_price": "Custom",
+      "per_employee": "Custom",
+      "notes": "Enterprise-focused plans."
+    },
+    "features": [
+      "Payroll",
+      "Taxation",
+      "Employee Onboarding",
+      "Time & attendance",
+      "Compliance"
+    ],
+    "summary": "An enterprise HRMS with advanced payroll and compliance capabilities.",
+    "logo": "/assets/vendors/zeta.png"
+  },
+  {
+    "id": "adrenalin",
+    "name": "Adrenalin HRMS",
+    "website": "https://www.myadrenalin.com/",
+    "pricing": {
+      "base_price": "Custom",
+      "per_employee": "Custom",
+      "notes": "Used by large payroll teams."
+    },
+    "features": [
+      "Payroll",
+      "HR analytics",
+      "Performance",
+      "Learning & development",
+      "Recruitment"
+    ],
+    "summary": "A mature HR platform widely used across Indian enterprises.",
+    "logo": "/assets/vendors/adrenalin.png"
+  },
+  {
+    "id": "factohr",
+    "name": "factoHR",
+    "website": "https://factohr.com/",
+    "pricing": {
+      "base_price": "₹49/employee",
+      "per_employee": "₹49 per employee",
+      "notes": "Value-friendly pricing tier."
+    },
+    "features": [
+      "Payroll processing",
+      "Geo-attendance",
+      "Performance",
+      "Travel & expense",
+      "HRIS"
+    ],
+    "summary": "A complete HR platform with cost-efficient payroll and attendance tools.",
+    "logo": "/assets/vendors/factohr.png"
+  },
+  {
+    "id": "pagarbook",
+    "name": "PagarBook",
+    "website": "https://www.pagarbook.com/",
+    "pricing": {
+      "base_price": "₹249/month",
+      "per_employee": "Free up to 20 employees",
+      "notes": "Great for micro-business payroll."
+    },
+    "features": [
+      "Staff attendance",
+      "Payroll",
+      "Salary slips",
+      "Mobile-first",
+      "SME-friendly"
+    ],
+    "summary": "A simple mobile-first payroll system for small businesses.",
+    "logo": "/assets/vendors/pagarbook.png"
+  },
+  {
+    "id": "qandle",
+    "name": "Qandle",
+    "website": "https://www.qandle.com/",
+    "pricing": {
+      "base_price": "₹99/employee",
+      "per_employee": "₹99 per employee",
+      "notes": "One of the most customizable HR suites."
+    },
+    "features": [
+      "HRIS",
+      "Performance",
+      "Payroll",
+      "Time tracking",
+      "Expense management"
+    ],
+    "summary": "Flexible HRMS with strong customization and process automation tools.",
+    "logo": "/assets/vendors/qandle.png"
+  }
+]
