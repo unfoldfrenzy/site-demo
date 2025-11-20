@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Benchmark - Payroll SaaS</title><link rel="stylesheet" href="assets/styles.css"></head>
+<body>
+<header class="site-header"><div class="container"><h1>Payroll SaaS Benchmark</h1><nav><a href="index.html">Home</a><a href="jobboard.html">Job Board</a></nav></div></header>
+<main class="container">
+  <h2>Live benchmark (auto-updated)</h2>
+  <p>Data source: <em>data/vendors.json</em> (updated by GitHub Actions)</p>
+  <div id="table-wrap">Loading...</div>
+  <h3>What changed this week</h3>
+  <ul id="changes"></ul>
+</main>
+<script>
+async function loadData(){
+  try{
+    const r = await fetch('data/vendors.json'); const rows = await r.json();
+    const wrap = document.getElementById('table-wrap');
+    if(!rows || rows.length===0){ wrap.innerHTML='<p>No data yet.</p>'; return; }
+    let html = '<table class="benchmark"><thead><tr><th>Vendor</th><th>Plan</th><th>Price</th><th>Limits</th><th>Features</th><th>Last Updated</th></tr></thead><tbody>';
+    rows.forEach(row=>{
+      html += `<tr><td>${row['Vendor']||''}</td><td>${row['Plan Name']||''}</td><td>${row['Price (₹/mo)']||''}</td><td>${row['Limits (Users etc.)']||''}</td><td>${row['Key Features']||''}</td><td>${row['Last Updated']||''}</td></tr>`;
+    });
+    html += '</tbody></table>'; wrap.innerHTML = html;
+  }catch(e){ document.getElementById('table-wrap').innerText='Failed to load data.'; console.error(e); }
+}
+async function loadChanges(){ try{ const r=await fetch('data/changes.json'); const changes=await r.json(); const ul=document.getElementById('changes'); if(!changes||Object.keys(changes).length===0){ul.innerHTML='<li>No changes recorded this week.</li>';return;} if(changes.added) changes.added.forEach(c=>{ const li=document.createElement('li'); li.textContent = 'New plan: ' + (c.Vendor || '') + ' - ' + (c['Plan Name']||''); ul.appendChild(li);}); if(changes.updated) changes.updated.forEach(c=>{ const li=document.createElement('li'); li.textContent = 'Updated: ' + (c.Vendor || '') + ' - ' + (c['Plan Name']||''); ul.appendChild(li);}); if(changes.removed) changes.removed.forEach(c=>{ const li=document.createElement('li'); li.textContent = 'Removed: ' + (c.Vendor || '') + ' - ' + (c['Plan Name']||''); ul.appendChild(li);}); }catch(e){console.warn('No changes.json') } }
+loadData(); loadChanges();
+</script>
+</body></html>

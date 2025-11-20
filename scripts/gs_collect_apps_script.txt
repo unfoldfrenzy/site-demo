@@ -1,0 +1,57 @@
+/*
+Google Apps Script - Collector + OpenAI Summarizer (paste into Extensions -> Apps Script)
+Make sure to set your OPENAI API key in PropertiesService or replace OPENAI_KEY constant.
+*/
+
+const OPENAI_KEY = 'YOUR_OPENAI_KEY'; // or use PropertiesService.getScriptProperties().getProperty('OPENAI_KEY')
+
+function fetchSourcesToSheet() {
+  const ss = SpreadsheetApp.getActive();
+  const sSources = ss.getSheetByName('Sources');
+  const sIncoming = ss.getSheetByName('Incoming');
+  if(!sSources || !sIncoming){ Logger.log('Sheets "Sources" or "Incoming" missing'); return; }
+
+  const sources = sSources.getDataRange().getValues().slice(1);
+  const existing = sIncoming.getDataRange().getValues().slice(1).map(r=>r[2]||'');
+  const seen = new Set(existing);
+
+  sources.forEach(row=>{
+    const [name, url, type] = row;
+    if(!url) return;
+    try{
+      if(type==='rss' || url.match(/\/feed|\.rss/)){
+        const xml = UrlFetchApp.fetch(url,{muteHttpExceptions:true}).getContentText();
+        const doc = XmlService.parse(xml);
+        const items = doc.getRootElement().getDescendants().filter(n=>n.getName && (n.getName()==='item'||n.getName()==='entry'));
+        items.forEach(it=>{
+          const title = (it.getChild('title') && it.getChild('title').getText())||'';
+          const link = (it.getChild('link') && (it.getChild('link').getText()||it.getChild('link').getAttribute('href') && it.getChild('link').getAttribute('href').getValue()))||'';
+          const pd = (it.getChild('pubDate') && it.getChild('pubDate').getText()) || (it.getChild('updated') && it.getChild('updated').getText()) || '';
+          if(link && !seen.has(link)){
+            const summarytags = summarizeWithOpenAI(title + "\n" + link);
+            sIncoming.appendRow([new Date(), title, link, pd, name, summarytags.summary || '', (summarytags.tags||[]).join(','), 'NO']);
+            seen.add(link);
+          }
+        });
+      }
+    }catch(e){
+      sIncoming.appendRow([new Date(), 'ERROR', url, '', name, e.toString(), '', 'ERR']);
+    }
+  });
+}
+
+function summarizeWithOpenAI(text){
+  const prompt = `Summarize this for a B2B newsletter in 40-60 words. Return JSON: {"summary":"...","tags":["tag1","tag2"]}. Text: ${text}`;
+  const res = UrlFetchApp.fetch('https://api.openai.com/v1/chat/completions', {
+    method:'post',
+    contentType:'application/json',
+    headers:{Authorization:'Bearer ' + OPENAI_KEY},
+    payload: JSON.stringify({model:'gpt-4o-mini', messages:[{role:'user', content:prompt}], max_tokens:200})
+  });
+  try{
+    const raw = JSON.parse(res.getContentText()).choices[0].message.content.trim();
+    return JSON.parse(raw);
+  }catch(e){
+    return {summary:'', tags:[]};
+  }
+}

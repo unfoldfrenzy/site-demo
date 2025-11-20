@@ -1,0 +1,29 @@
+name: Update Jobs from Airtable
+
+on:
+  schedule:
+    - cron: '0 1 * * *' # daily 01:00 UTC
+  workflow_dispatch:
+
+jobs:
+  fetch-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Fetch jobs
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+        run: |
+          mkdir -p data
+          curl -s -H "Authorization: Bearer $AIRTABLE_API_KEY" "https://api.airtable.com/v0/$AIRTABLE_BASE_ID/Jobs?maxRecords=100&view=Grid%20view"            | jq '.records | map(.fields)' > data/jobs.json
+      - name: Commit
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add data/jobs.json || true
+          git commit -m "Update jobs" || echo "No changes"
+          git push || echo "Push failed"

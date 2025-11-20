@@ -1,19 +1,35 @@
-# Full Benchmark Site Repo
+# Payroll SaaS Intelligence - Full GitHub Repo (Auto-generated)
 
-This repo is a production-ready benchmark pages + automation starter.
-It expects a Google Sheet (vendors) and an Airtable jobs base for jobs (optional).
+This repository is a fully generated GitHub-ready project that includes:
+- Static frontend (index, benchmark, jobboard)
+- Google Apps Script collector for vendor pages + OpenAI summarization
+- GitHub Actions workflows to fetch Vendors (from published Google Sheet CSV) and Jobs (from Airtable)
+- Data files written into `/data` by workflows
+- Newsletter template and sponsor materials
 
-## Quick setup
+## Quick start (deploy to GitHub Pages)
 
-1. Create a GitHub repo and push these files to `main`.
-2. Add Secrets (Settings → Secrets → Actions):
-   - SHEET_CSV_URL : your CSV export link for the Google Sheet, e.g. https://docs.google.com/spreadsheets/d/1LBevQAeMmu2F2tHMSJG7lpC3vqtYehm8eamjMmXv09E/export?format=csv
-   - AIRTABLE_API_KEY
-   - AIRTABLE_BASE_ID
-3. Run Actions manually once: `Update Vendors from Sheet` then `Generate Benchmark Pages`.
-4. Enable GitHub Pages (Settings → Pages → main branch → root).
-5. Visit https://<your-username>.github.io/<repo>/benchmark/
+1. Create a new repository on GitHub (e.g. `payroll-saas-intel`) and push the contents of this repo to `main`.
+2. In your repo settings -> Pages -> set Source to `main` branch and folder `/ (root)` and save.
+3. Add the following repository Secrets (Settings -> Secrets -> Actions):
+   - `SHEET_CSV_URL` : publish-to-web CSV URL for your Vendors sheet (or leave and use local CSV)
+   - `AIRTABLE_API_KEY` : your Airtable API key
+   - `AIRTABLE_BASE_ID` : your Airtable base id (starts with 'app...')
+   - (Optional) `OPENAI_API_KEY` : for Apps Script summarization (also set in Apps Script project properties)
+   - (Optional) `BEEHIIV_API_KEY``, `BEEHIIV_PUBLICATION_ID` : if you want automated newsletters
 
-## Google Sheet
-You provided sheet: https://docs.google.com/spreadsheets/d/1LBevQAeMmu2F2tHMSJG7lpC3vqtYehm8eamjMmXv09E
-Make sure the sheet is "Anyone with link – Viewer" and then use the export CSV URL as the secret `SHEET_CSV_URL`
+4. Configure Google Sheets:
+   - Create a Google Sheet with tabs: `Vendors` (export as CSV) and `Sources` & `Incoming` (for Apps Script).
+   - Open Extensions -> Apps Script, create a project, paste `scripts/gs_collect_apps_script.txt`.
+   - Set a time-driven trigger for `fetchSourcesToSheet` (daily).
+
+5. Configure Airtable:
+   - Create a base named e.g. `Payroll SaaS Job Board` and a table `Jobs` with fields:
+     `Job Title`, `Company`, `Location`, `Job Type`, `Salary Range`, `Description`, `Apply Link`, `Tags`, `Featured` (checkbox).
+   - Optionally set up Gumroad + Zapier for paid featured listings.
+
+6. Run the GitHub Actions workflows manually (Actions tab -> choose workflow -> Run workflow) to generate `data/vendors.json` and `data/jobs.json`.
+
+7. Visit your site: `https://<your-username>.github.io/<repo>/`
+
+If you'd like I can pre-populate `data/vendors.json` with five sample vendors and sample pricing rows — say 'yes' and I'll add them.

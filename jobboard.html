@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Job Board</title><link rel="stylesheet" href="assets/styles.css"></head><body>
+<header class="site-header"><div class="container"><h1>Job Board</h1><nav><a href="index.html">Home</a><a href="benchmark.html">Benchmark</a></nav></div></header>
+<main class="container">
+  <h2>Open Roles (Payroll SaaS)</h2>
+  <div id="jobs">Loading...</div>
+  <p>Post a job: use the Airtable form you set up. Featured posts will be highlighted.</p>
+</main>
+<script>
+fetch('data/jobs.json').then(r=>r.json()).then(rows=>{
+  const root = document.getElementById('jobs'); root.innerHTML='';
+  if(!rows || rows.length===0){ root.innerHTML='<p>No jobs yet.</p>'; return; }
+  rows.forEach(j=>{
+    const div = document.createElement('div'); div.className = 'job'+(j.Featured ? ' featured' : '');
+    div.innerHTML = `<h3>${j['Job Title'] || ''} <small>@ ${j.Company || ''}</small></h3>
+      <p><b>Location:</b> ${j.Location || 'Remote'} | <b>Type:</b> ${j['Job Type'] || ''}</p>
+      <p>${j.Description || ''}</p>
+      <p><a href="${j['Apply Link'] || '#'}" target="_blank">Apply →</a></p>`;
+    root.appendChild(div);
+  });
+}).catch(e=>{ document.getElementById('jobs').innerText='Error loading jobs'; console.error(e) });
+</script></body></html>
