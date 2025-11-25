@@ -1,4 +1,26 @@
-- name: Generate Pages
+name: Generate Benchmark Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Grant permission to write back to the repository
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Generate Pages
         run: |
           mkdir -p benchmark
           template=$(cat benchmark/template.html)
@@ -28,3 +50,11 @@
             
             echo "$page" > "benchmark/${id}.html"
           done
+
+      - name: Commit pages
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add benchmark/*.html || true
+          git commit -m "Generated vendor pages" || echo "No changes"
+          git push || echo "Push failed"
