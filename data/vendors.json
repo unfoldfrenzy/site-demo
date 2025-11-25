@@ -1,44 +1,50 @@
 [
   {
-    "Name": "Gusto",
-    "Website": "https://gusto.com",
-    "Pricing": "$40/mo + $6/person",
-    "Description": "Modern HR platform for payroll, benefits, and management.",
-    "Tags": "Payroll, SMB, Benefits"
+    "name": "Gusto",
+    "website": "https://gusto.com",
+    "price": "$40/mo + $6/person",
+    "features": "Modern HR platform for payroll, benefits, and management.",
+    "plan": "Payroll, SMB, Benefits",
+    "last_updated": "Today"
   },
   {
-    "Name": "Deel",
-    "Website": "https://www.deel.com",
-    "Pricing": "Starts at $49/mo",
-    "Description": "Global payroll and compliance for international teams.",
-    "Tags": "Global, EOR, Contractor"
+    "name": "Deel",
+    "website": "https://www.deel.com",
+    "price": "Starts at $49/mo",
+    "features": "Global payroll and compliance for international teams.",
+    "plan": "Global, EOR, Contractor",
+    "last_updated": "Today"
   },
   {
-    "Name": "Rippling",
-    "Website": "https://www.rippling.com",
-    "Pricing": "$8/user/month",
-    "Description": "Unified workforce platform for HR, IT, and Finance.",
-    "Tags": "HRIS, IT, Automation"
+    "name": "Rippling",
+    "website": "https://www.rippling.com",
+    "price": "$8/user/month",
+    "features": "Unified workforce platform for HR, IT, and Finance.",
+    "plan": "HRIS, IT, Automation",
+    "last_updated": "Today"
   },
   {
-    "Name": "OnPay",
-    "Website": "https://onpay.com",
-    "Pricing": "$40/mo + $6/person",
-    "Description": "Payroll and HR software focused on accuracy and support.",
-    "Tags": "Payroll, HR, Specialized"
+    "name": "OnPay",
+    "website": "https://onpay.com",
+    "price": "$40/mo + $6/person",
+    "features": "Payroll and HR software focused on accuracy and support.",
+    "plan": "Payroll, HR, Specialized",
+    "last_updated": "Today"
   },
   {
-    "Name": "Papaya Global",
-    "Website": "https://www.papayaglobal.com",
-    "Pricing": "Custom Quote",
-    "Description": "Global workforce management and enterprise payroll.",
-    "Tags": "Enterprise, Global, Analytics"
+    "name": "Papaya Global",
+    "website": "https://www.papayaglobal.com",
+    "price": "Custom Quote",
+    "features": "Global workforce management and enterprise payroll.",
+    "plan": "Enterprise, Global, Analytics",
+    "last_updated": "Today"
   },
   {
-    "Name": "BambooHR",
-    "Website": "https://www.bamboohr.com",
-    "Pricing": "Custom Quote",
-    "Description": "HR software with heart, focused on the employee experience.",
-    "Tags": "HR, Culture, Onboarding"
+    "name": "BambooHR",
+    "website": "https://www.bamboohr.com",
+    "price": "Custom Quote",
+    "features": "HR software with heart, focused on the employee experience.",
+    "plan": "HR, Culture, Onboarding",
+    "last_updated": "Today"
   }
 ]
