@@ -1,74 +1,69 @@
-name: Update Vendors from Sheet
+name: Update Vendors
 
 on:
   schedule:
-    - cron: '0 3 * * *' # daily 03:00 UTC
-  workflow_dispatch:
+    - cron: '0 0 * * *' # Runs daily at midnight
+  workflow_dispatch:      # Allows manual trigger
+
+permissions:
+  contents: write
 
 jobs:
-  update-vendors:
+  update-data:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Fetch published CSV (Vendors)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Fetch Data and Convert to JSON
         env:
-          SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL }}
+          CSV_URL: ${{ secrets.SHEET_CSV_URL }}
         run: |
-          set -e
-          mkdir -p data
-          echo "Fetching CSV from $SHEET_CSV_URL"
-          curl -s "$SHEET_CSV_URL" -o data/vendors.csv
-          python3 <<'PY'
-import csv, json
-rows = []
-with open('data/vendors.csv', newline='', encoding='utf-8') as f:
-    reader = csv.DictReader(f)
-    for r in reader:
-        rows.append(r)
-with open('data/vendors.json','w',encoding='utf-8') as fh:
-    json.dump(rows, fh, ensure_ascii=False, indent=2)
-PY
+          # 1. Download the CSV
+          curl -L "$CSV_URL" -o vendors.csv
 
-      - name: Generate changes.json (compare with previous)
-        run: |
-          python3 <<'PY'
-import json, os, shutil
+          # 2. Convert CSV to JSON using Python (Safe for commas/quotes)
+          python -c "
+          import csv, json, sys
 
-def load(p):
-    return json.load(open(p, encoding='utf-8')) if os.path.exists(p) else []
+          # Read CSV
+          items = []
+          try:
+              with open('vendors.csv', 'r', encoding='utf-8') as f:
+                  reader = csv.DictReader(f)
+                  for row in reader:
+                      # Clean keys/values
+                      clean_row = {k.strip(): v.strip() for k, v in row.items() if k}
+                      items.append(clean_row)
+          except Exception as e:
+              print(f'Error reading CSV: {e}')
+              sys.exit(1)
 
-new = load('data/vendors.json')
-old = load('data/vendors_prev.json')
-
-changes = {'added': [], 'removed': [], 'updated': []}
-
-old_map = {o.get('Vendor'): o for o in old}
-new_map = {n.get('Vendor'): n for n in new}
-
-for v in new_map:
-    if v not in old_map:
-        changes['added'].append(new_map[v])
-    elif new_map[v] != old_map[v]:
-        changes['updated'].append(new_map[v])
-
-for v in old_map:
-    if v not in new_map:
-        changes['removed'].append(old_map[v])
-
-with open('data/changes.json','w',encoding='utf-8') as fh:
-    json.dump(changes, fh, ensure_ascii=False, indent=2)
-
-if os.path.exists('data/vendors.json'):
-    shutil.copyfile('data/vendors.json', 'data/vendors_prev.json')
-PY
+          # Save to JSON
+          try:
+              with open('data/vendors.json', 'w', encoding='utf-8') as f:
+                  json.dump(items, f, indent=2)
+              print(f'Successfully converted {len(items)} rows to JSON.')
+          except Exception as e:
+              print(f'Error saving JSON: {e}')
+              sys.exit(1)
+          "
 
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add data/vendors.json data/changes.json data/vendors_prev.json || true
-          git commit -m "Auto-update vendors and changes" || echo "No changes"
-          git push || echo "Push failed"
+          
+          # Check if there are changes
+          git add data/vendors.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update vendor data from Google Sheets"
+            git push
+          fi
