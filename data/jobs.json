@@ -1,1 +1,68 @@
-[]
+[
+  {
+    "id": "rec3Fgw7spFlWQ9xd",
+    "title": "Product Designer",
+    "company": "Unknown",
+    "location": "Seattle, WA",
+    "type": "Full-time",
+    "salary": "$100,000 - $130,000",
+    "url": "#",
+    "tags": [],
+    "date": "2025-11-25T15:04:16.000Z"
+  },
+  {
+    "id": "recAxzujw6c7LAMvQ",
+    "title": "Marketing Manager",
+    "company": "Unknown",
+    "location": "New York, NY",
+    "type": "Full-time",
+    "salary": "$90,000 - $110,000",
+    "url": "#",
+    "tags": [],
+    "date": "2025-11-25T15:04:16.000Z"
+  },
+  {
+    "id": "recEW61oZaMA9Fu3b",
+    "title": "HR Coordinator",
+    "company": "Unknown",
+    "location": "Chicago, IL",
+    "type": "Full-time",
+    "salary": "$55,000 - $65,000",
+    "url": "#",
+    "tags": [],
+    "date": "2025-11-25T15:04:16.000Z"
+  },
+  {
+    "id": "recPhNy2kq7umMbE8",
+    "title": "Data Analyst",
+    "company": "Unknown",
+    "location": "Austin, TX",
+    "type": "Full-time",
+    "salary": "$70,000 - $90,000",
+    "url": "#",
+    "tags": [],
+    "date": "2025-11-25T15:04:16.000Z"
+  },
+  {
+    "id": "recXDomcr6LVI2GQc",
+    "title": "Software Engineer",
+    "company": "Unknown",
+    "location": "San Francisco, CA",
+    "type": "Full-time",
+    "salary": "$120,000 - $150,000",
+    "url": "#",
+    "tags": [],
+    "date": "2025-11-25T15:04:16.000Z"
+  },
+  {
+    "id": "recwWxJdv9LToTNjd",
+    "title": "Customer Support Specialist",
+    "company": "Unknown",
+    "location": "Remote",
+    "type": "Full-time",
+    "salary": "$40,000 - $50,000",
+    "url": "#",
+    "tags": [],
+    "date": "2025-11-25T15:04:16.000Z"
+  }
+]
