@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "Name": "Gusto",
+    "Website": "https://gusto.com",
+    "Pricing": "$40/mo + $6/person",
+    "Description": "Modern HR platform for payroll, benefits, and management.",
+    "Tags": "Payroll, SMB, Benefits"
+  },
+  {
+    "Name": "Deel",
+    "Website": "https://www.deel.com",
+    "Pricing": "Starts at $49/mo",
+    "Description": "Global payroll and compliance for international teams.",
+    "Tags": "Global, EOR, Contractor"
+  },
+  {
+    "Name": "Rippling",
+    "Website": "https://www.rippling.com",
+    "Pricing": "$8/user/month",
+    "Description": "Unified workforce platform for HR, IT, and Finance.",
+    "Tags": "HRIS, IT, Automation"
+  },
+  {
+    "Name": "OnPay",
+    "Website": "https://onpay.com",
+    "Pricing": "$40/mo + $6/person",
+    "Description": "Payroll and HR software focused on accuracy and support.",
+    "Tags": "Payroll, HR, Specialized"
+  },
+  {
+    "Name": "Papaya Global",
+    "Website": "https://www.papayaglobal.com",
+    "Pricing": "Custom Quote",
+    "Description": "Global workforce management and enterprise payroll.",
+    "Tags": "Enterprise, Global, Analytics"
+  },
+  {
+    "Name": "BambooHR",
+    "Website": "https://www.bamboohr.com",
+    "Pricing": "Custom Quote",
+    "Description": "HR software with heart, focused on the employee experience.",
+    "Tags": "HR, Culture, Onboarding"
+  }
+]
