@@ -1,68 +1,131 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Benchmark - Payroll SaaS</title><link rel="stylesheet" href="assets/styles.css"></head>
-<body>
-<header class="site-header"><div class="container"><h1>Payroll SaaS Benchmark</h1><nav><a href="index.html">Home</a><a href="jobboard.html">Job Board</a></nav></div></header>
-<main class="container">
-  <h2>Live benchmark (auto-updated)</h2>
-  <p>Data source: <em>data/vendors.json</em> (updated by GitHub Actions)</p>
-  <div id="table-wrap">Loading...</div>
-  <h3>What changed this week</h3>
-  <ul id="changes"></ul>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Benchmark - Payroll SaaS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+<header class="bg-white shadow">
+  <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between">
+    <h1 class="text-3xl font-bold text-gray-900">Payroll SaaS Benchmark</h1>
+    <nav class="space-x-4">
+      <a href="index.html" class="text-gray-500 hover:text-gray-900">Home</a>
+      <a href="jobboard.html" class="text-gray-500 hover:text-gray-900">Job Board</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+  <div class="px-4 py-6 sm:px-0">
+    <h2 class="text-xl font-semibold mb-4">Live benchmark (auto-updated)</h2>
+    <p class="text-sm text-gray-500 mb-6">Data source: <em>data/vendors.json</em> (updated by GitHub Actions)</p>
+
+    <div class="flex flex-col">
+      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vendor</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Limits</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Features</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Updated</th>
+                </tr>
+              </thead>
+              <tbody id="benchmark-table-body" class="bg-white divide-y divide-gray-200">
+                <tr><td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">Loading data...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="text-lg font-medium mt-8 mb-2">What changed this week</h3>
+    <ul id="changes" class="list-disc pl-5 text-gray-600">
+      <li>No changes recorded this week.</li>
+    </ul>
+  </div>
 </main>
+
 <script>
-async function loadData(){
-  try{
-    const r = await // Fetch and display data
+  // This script automatically maps your Google Sheet headers (Name, Pricing)
+  // to the lowercase variables needed by the site.
+  document.addEventListener('DOMContentLoaded', () => {
     fetch('data/vendors.json')
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById('benchmark-table-body');
-            // Clear any loading state
-            tableBody.innerHTML = ''; 
+      .then(response => {
+        if (!response.ok) throw new Error("HTTP error " + response.status);
+        return response.json();
+      })
+      .then(data => {
+        const tableBody = document.getElementById('benchmark-table-body');
+        tableBody.innerHTML = ''; // Clear loading message
 
-            data.forEach(item => {
-                const row = document.createElement('tr');
-                
-                // DATA MAPPING:
-                // We map your Capitalized Keys (Name, Website, etc.) to the table cells
-                const name = item.Name || item.name || 'Unknown';
-                const website = item.Website || item.website || '#';
-                const price = item.Pricing || item.price || '';
-                const description = item.Description || item.description || '';
-                const tags = item.Tags || item.tags || '';
+        if (data.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">No data found in JSON.</td></tr>';
+            return;
+        }
 
-                row.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center">
-                            <div class="ml-4">
-                                <div class="text-sm font-medium text-gray-900">
-                                    <a href="${website}" target="_blank" class="text-blue-600 hover:text-blue-900">
-                                        ${name}
-                                    </a>
-                                </div>
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            
+            // --- DATA MAPPING SECTION ---
+            // Handles both "Name" (Google Sheet) and "name" (Standard)
+            const name = item.Name || item.name || 'Unknown';
+            const website = item.Website || item.website || '#';
+            const price = item.Pricing || item.price || '';
+            const description = item.Description || item.description || '';
+            const tags = item.Tags || item.tags || '';
+            // ---------------------------
+
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                        <div class="ml-4">
+                            <div class="text-sm font-medium text-gray-900">
+                                <a href="${website}" target="_blank" class="text-blue-600 hover:text-blue-900 hover:underline">
+                                    ${name}
+                                </a>
                             </div>
                         </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            ${tags}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${price}
-                    </td>
-                    <td class="px-6 py-4 text-sm text-gray-500">
-                        -
-                    </td>
-                    <td class="px-6 py-4 text-sm text-gray-500">
-                        ${description}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        Today
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-        })
-        .catch(error => console.error('Error loading data:', error));
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                        ${tags}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ${price}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                    -
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                    ${description}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Today
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error loading data:', error);
+        document.getElementById('benchmark-table-body').innerHTML = `
+            <tr><td colspan="6" class="px-6 py-4 text-center text-red-500">
+                Error loading data. Check console for details.
+            </td></tr>`;
+      });
+  });
+</script>
+
+</body>
+</html>
