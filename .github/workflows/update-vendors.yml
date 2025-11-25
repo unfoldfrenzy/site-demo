@@ -20,47 +20,58 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Fetch Data and Convert to JSON
+      - name: Download CSV
         env:
           CSV_URL: ${{ secrets.SHEET_CSV_URL }}
         run: |
-          # 1. Download the CSV
           curl -L "$CSV_URL" -o vendors.csv
 
-          # 2. Convert CSV to JSON using Python (Safe for commas/quotes)
-          python -c "
-          import csv, json, sys
+      - name: Convert to JSON
+        shell: python
+        run: |
+          import csv
+          import json
+          import sys
+          import os
 
-          # Read CSV
+          # Verify file exists
+          if not os.path.exists('vendors.csv'):
+              print("Error: vendors.csv not found")
+              sys.exit(1)
+
           items = []
           try:
               with open('vendors.csv', 'r', encoding='utf-8') as f:
                   reader = csv.DictReader(f)
                   for row in reader:
-                      # Clean keys/values
+                      # Clean extra whitespace from keys and values
                       clean_row = {k.strip(): v.strip() for k, v in row.items() if k}
-                      items.append(clean_row)
+                      if clean_row:  # Only add if row is not empty
+                          items.append(clean_row)
           except Exception as e:
-              print(f'Error reading CSV: {e}')
+              print(f"Error processing CSV: {e}")
               sys.exit(1)
 
-          # Save to JSON
+          # Ensure data folder exists
+          if not os.path.exists('data'):
+              os.makedirs('data')
+
           try:
               with open('data/vendors.json', 'w', encoding='utf-8') as f:
                   json.dump(items, f, indent=2)
-              print(f'Successfully converted {len(items)} rows to JSON.')
+              print(f"Success! Converted {len(items)} rows.")
           except Exception as e:
-              print(f'Error saving JSON: {e}')
+              print(f"Error saving JSON: {e}")
               sys.exit(1)
-          "
 
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           
-          # Check if there are changes
           git add data/vendors.json
+          
+          # Only commit if data changed
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
