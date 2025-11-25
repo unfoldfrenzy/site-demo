@@ -1,68 +1,84 @@
 [
   {
-    "id": "rec3Fgw7spFlWQ9xd",
-    "title": "Product Designer",
-    "company": "Unknown",
-    "location": "Seattle, WA",
-    "type": "Full-time",
-    "salary": "$100,000 - $130,000",
-    "url": "#",
-    "tags": [],
-    "date": "2025-11-25T15:04:16.000Z"
-  },
-  {
-    "id": "recAxzujw6c7LAMvQ",
-    "title": "Marketing Manager",
-    "company": "Unknown",
+    "id": "rec7Dj9bbkcx7HqAx",
+    "title": "Marketing Coordinator",
+    "company": "Bright Media",
     "location": "New York, NY",
     "type": "Full-time",
-    "salary": "$90,000 - $110,000",
-    "url": "#",
-    "tags": [],
-    "date": "2025-11-25T15:04:16.000Z"
+    "salary": "$50,000 - $65,000",
+    "url": "https://brightmedia18fb.com/jobs/marketing-coordinator",
+    "tags": [
+      "Marketing"
+    ],
+    "date": "2025-11-25T20:08:25.000Z"
   },
   {
-    "id": "recEW61oZaMA9Fu3b",
-    "title": "HR Coordinator",
-    "company": "Unknown",
-    "location": "Chicago, IL",
-    "type": "Full-time",
-    "salary": "$55,000 - $65,000",
-    "url": "#",
-    "tags": [],
-    "date": "2025-11-25T15:04:16.000Z"
-  },
-  {
-    "id": "recPhNy2kq7umMbE8",
-    "title": "Data Analyst",
-    "company": "Unknown",
-    "location": "Austin, TX",
-    "type": "Full-time",
-    "salary": "$70,000 - $90,000",
-    "url": "#",
-    "tags": [],
-    "date": "2025-11-25T15:04:16.000Z"
-  },
-  {
-    "id": "recXDomcr6LVI2GQc",
-    "title": "Software Engineer",
-    "company": "Unknown",
+    "id": "recEjCVumGHwNrsY9",
+    "title": "Product Manager",
+    "company": "NextGen Solutions",
     "location": "San Francisco, CA",
     "type": "Full-time",
-    "salary": "$120,000 - $150,000",
-    "url": "#",
-    "tags": [],
-    "date": "2025-11-25T15:04:16.000Z"
+    "salary": "$110,000 - $140,000",
+    "url": "https://nextgensolutions2aef.com/careers/product-manager",
+    "tags": [
+      "Product",
+      "Engineering"
+    ],
+    "date": "2025-11-25T20:08:25.000Z"
   },
   {
-    "id": "recwWxJdv9LToTNjd",
-    "title": "Customer Support Specialist",
-    "company": "Unknown",
+    "id": "recIcE87zSUC1iK0h",
+    "title": "Sales Representative",
+    "company": "GreenLeaf Corp",
+    "location": "Chicago, IL",
+    "type": "Full-time",
+    "salary": "$60,000 - $80,000",
+    "url": "https://greenleafcorp87e0.com/careers/sales-representative",
+    "tags": [
+      "Sales"
+    ],
+    "date": "2025-11-25T20:08:25.000Z"
+  },
+  {
+    "id": "recjRA6SjYWFq7ofo",
+    "title": "UI/UX Designer",
+    "company": "PixelWorks",
+    "location": "Austin, TX",
+    "type": "Contract",
+    "salary": "$45/hr - $60/hr",
+    "url": "https://pixelworks344d.com/jobs/ui-ux-designer",
+    "tags": [
+      "Design",
+      "Engineering"
+    ],
+    "date": "2025-11-25T20:08:25.000Z"
+  },
+  {
+    "id": "recoVkXGBTFqgFE2a",
+    "title": "Operations Analyst",
+    "company": "LogiPro",
+    "location": "Remote",
+    "type": "Part-time",
+    "salary": "$30/hr - $40/hr",
+    "url": "https://logiprofc62.com/jobs/operations-analyst",
+    "tags": [
+      "Remote",
+      "Operations"
+    ],
+    "date": "2025-11-25T20:08:25.000Z"
+  },
+  {
+    "id": "recyNjdRKa74ij24H",
+    "title": "Software Engineer",
+    "company": "Acme Tech",
     "location": "Remote",
     "type": "Full-time",
-    "salary": "$40,000 - $50,000",
-    "url": "#",
-    "tags": [],
-    "date": "2025-11-25T15:04:16.000Z"
+    "salary": "$90,000 - $120,000",
+    "url": "https://acmeteched6c.com/careers/software-engineer",
+    "tags": [
+      "Remote",
+      "Engineering"
+    ],
+    "date": "2025-11-25T20:08:25.000Z"
   }
 ]
