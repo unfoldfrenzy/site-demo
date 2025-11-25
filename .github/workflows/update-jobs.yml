@@ -2,8 +2,8 @@ name: Update Jobs from Airtable
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Runs every 6 hours
-  workflow_dispatch:      # Allows manual trigger
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -24,10 +24,10 @@ jobs:
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
-          TABLE_NAME: 'Jobs' # <--- MAKE SURE YOUR AIRTABLE TAB IS NAMED THIS
+          TABLE_NAME: 'Jobs'
         run: |
           python -c "
-          import os, json, urllib.request, urllib.error
+          import os, json, urllib.request, urllib.parse
 
           api_key = os.environ.get('AIRTABLE_API_KEY')
           base_id = os.environ.get('AIRTABLE_BASE_ID')
@@ -37,7 +37,6 @@ jobs:
               print('Error: Missing API Key or Base ID secrets.')
               exit(1)
 
-          # Encoded table name to handle spaces if needed
           url = f'https://api.airtable.com/v0/{base_id}/{urllib.parse.quote(table_name)}'
           headers = {'Authorization': f'Bearer {api_key}'}
 
@@ -46,38 +45,42 @@ jobs:
               with urllib.request.urlopen(req) as response:
                   data = json.load(response)
                   
-                  # Process records
                   jobs = []
                   for record in data.get('records', []):
                       fields = record.get('fields', {})
-                      # Map Airtable fields to Website keys (lowercase)
+                      
+                      # --- SMART MAPPING START ---
+                      # Try multiple common names for each field
+                      title = fields.get('Job Title') or fields.get('Title') or fields.get('Name') or 'Untitled Role'
+                      company = fields.get('Company') or fields.get('Company Name') or 'Unknown Company'
+                      location = fields.get('Location') or fields.get('City') or 'Remote'
+                      job_type = fields.get('Job Type') or fields.get('Type') or 'Full-time'
+                      salary = fields.get('Salary Range') or fields.get('Salary') or ''
+                      link = fields.get('Apply Link') or fields.get('Link') or fields.get('URL') or '#'
+                      tags = fields.get('Tags') or []
+                      # --- SMART MAPPING END ---
+
                       job = {
                           'id': record.get('id'),
-                          'title': fields.get('Job Title', 'Untitled'),
-                          'company': fields.get('Company', 'Unknown'),
-                          'location': fields.get('Location', 'Remote'),
-                          'type': fields.get('Job Type', 'Full-time'),
-                          'salary': fields.get('Salary Range', ''),
-                          'url': fields.get('Apply Link', '#'),
-                          'tags': fields.get('Tags', []),
+                          'title': title,
+                          'company': company,
+                          'location': location,
+                          'type': job_type,
+                          'salary': salary,
+                          'url': link,
+                          'tags': tags,
                           'date': record.get('createdTime', '')
                       }
                       jobs.append(job)
 
-                  # Ensure data directory exists
                   if not os.path.exists('data'):
                       os.makedirs('data')
 
-                  # Save to file
                   with open('data/jobs.json', 'w') as f:
                       json.dump(jobs, f, indent=2)
                   
                   print(f'Success! Fetched {len(jobs)} jobs.')
 
-          except urllib.error.HTTPError as e:
-              print(f'HTTP Error: {e.code} {e.reason}')
-              print(e.read().decode('utf-8')) # Print the actual error from Airtable
-              exit(1)
           except Exception as e:
               print(f'Error: {e}')
               exit(1)
@@ -87,12 +90,10 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          
           git add data/jobs.json
-          
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Update jobs from Airtable"
+            git commit -m "Update jobs with smart column mapping"
             git push
           fi
