@@ -83,7 +83,7 @@ jobs:
               'title': f'Payroll Intelligence: Weekly Update {datetime.date.today()}',
               'subtitle': 'Latest jobs and pricing changes.',
               'status': 'draft',  # Saves as draft so you can review before sending
-              'content_tags': ['weekly-update'],
+              'content_tags': ['weekly-update', 'payroll-intel', 'automated'],
               'body_html': html_content
           }
 
