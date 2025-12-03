@@ -79,11 +79,19 @@ jobs:
               'Authorization': f'Bearer {api_key}',
               'Content-Type': 'application/json'
           }
+          # --- DYNAMIC TAG LOGIC ---
+          my_tags = ['weekly-update']
+          if new_jobs:
+              my_tags.append('jobs')
+          if new_vendors:
+              my_tags.append('vendor-updates')
+          # -------------------------
+
           payload = {
               'title': f'Payroll Intelligence: Weekly Update {datetime.date.today()}',
               'subtitle': 'Latest jobs and pricing changes.',
-              'status': 'draft',  # Saves as draft so you can review before sending
-              'content_tags': ['weekly-update', 'payroll-intel', 'automated'],
+              'status': 'draft',
+              'content_tags': my_tags,  # Uses the list we built above
               'body_html': html_content
           }
 
