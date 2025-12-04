@@ -30,14 +30,14 @@
   {
     "name": "Papaya Global",
     "website": "https://www.papayaglobal.com",
-    "price": "$99/mon",
+    "price": "$90/month",
     "description": "Global workforce management and enterprise payroll.",
     "tags": "Enterprise, Global, Analytics"
   },
   {
     "name": "BambooHR",
     "website": "https://www.bamboohr.com",
-    "price": "$79/mon",
+    "price": "$82/month",
     "description": "HR software with heart, focused on the employee experience.",
     "tags": "HR, Culture, Onboarding"
   },

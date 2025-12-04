@@ -3,6 +3,18 @@
     "date": "2025-12-04",
     "vendor": "Papaya Global",
     "type": "Price Change",
+    "details": "Price changed from $99/mon to $90/month"
+  },
+  {
+    "date": "2025-12-04",
+    "vendor": "BambooHR",
+    "type": "Price Change",
+    "details": "Price changed from $79/mon to $82/month"
+  },
+  {
+    "date": "2025-12-04",
+    "vendor": "Papaya Global",
+    "type": "Price Change",
     "details": "Price changed from Custom Quote to $99/mon"
   },
   {
