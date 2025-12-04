@@ -5,6 +5,75 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Payroll SaaS Intelligence</title>
   <link rel="stylesheet" href="assets/styles.css">
+  
+  <style>
+    /* Updates Feed Container */
+    .updates-section {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Individual Update Card */
+    .update-card {
+        background: #ffffff;
+        border: 1px solid #eee;
+        border-left: 5px solid #007bff; /* Default Blue */
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column; /* Stack on mobile, row on desktop */
+        gap: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .update-card {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    /* Color Coding based on Type */
+    .update-card.price-change { border-left-color: #dc3545; } /* Red */
+    .update-card.new-vendor { border-left-color: #28a745; }   /* Green */
+    .update-card.plan-update { border-left-color: #ffc107; }  /* Yellow */
+
+    .update-meta {
+        font-size: 0.85rem;
+        color: #6b7280;
+        min-width: 100px;
+    }
+
+    .update-content {
+        flex-grow: 1;
+    }
+
+    .update-content h4 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #111827;
+    }
+
+    .update-content p {
+        margin: 0.25rem 0 0 0;
+        color: #4b5563;
+        font-size: 0.95rem;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: white;
+        background-color: #007bff;
+        text-transform: uppercase;
+        width: fit-content;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -26,6 +95,15 @@
       <p><a class="btn" href="benchmark.html">View Benchmark</a> <a class="btn ghost" href="jobboard.html">View Job Board</a></p>
     </section>
 
+    <section class="updates-section">
+      <h3>🔔 Recent Market Updates</h3>
+      <div id="changelog-container">
+          <p style="color: #666; font-style: italic;">Loading intelligence feed...</p>
+      </div>
+    </section>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 2rem 0;">
+
     <section>
       <h3>How it works</h3>
       <ol>
@@ -41,5 +119,22 @@
       <p>Built with automation. Customize for your niche. <a href="README.md">Read docs</a>.</p>
     </div>
   </footer>
-</body>
-</html>
+
+  <script>
+    async function loadChangelog() {
+        const container = document.getElementById('changelog-container');
+        
+        try {
+            // Attempt to fetch the file
+            const response = await fetch('changelog.json');
+            
+            // If file doesn't exist yet (first run), handle gracefully
+            if (!response.ok) {
+                container.innerHTML = '<p style="color:#666;">No updates recorded yet. (Waiting for next scrape)</p>';
+                return;
+            }
+
+            const data = await response.json();
+
+            // Handle empty data
+            if (!data || data.length ===
