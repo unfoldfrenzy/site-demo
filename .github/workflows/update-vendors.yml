@@ -91,16 +91,18 @@ jobs:
                   old_item = old_dict[name]
                   
                   # Check Price Change
-                  if new_item['price'] != old_item['price']:
+                  # Use .get() to avoid crashing if 'price' is missing in old data
+                  if new_item['price'] != old_item.get('price', ''):
                       changes.append({
                           "date": str(date.today()),
                           "vendor": name,
                           "type": "Price Change",
-                          "details": f"Price changed from {old_item['price']} to {new_item['price']}"
+                          "details": f"Price changed from {old_item.get('price', 'N/A')} to {new_item['price']}"
                       })
                   
                   # Check Feature/Description Update
-                  if new_item['description'] != old_item['description']:
+                  # Use .get() to avoid crashing if 'description' is missing in old data
+                  if new_item['description'] != old_item.get('description', ''):
                        changes.append({
                           "date": str(date.today()),
                           "vendor": name,
