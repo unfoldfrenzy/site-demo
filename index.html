@@ -120,74 +120,75 @@
     </div>
   </footer>
 
-  <script>
-    async function loadChangelog() {
-        const container = document.getElementById('changelog-container');
-        
-        try {
-            // FIX 1: Add cache buster (?v=...) to prevent loading old data
-            // FIX 2: Using 'changelog.json'. If this fails, change it to 'data/changelog.json'
-            const response = await fetch('changelog.json?v=' + Date.now());
-            
-            if (!response.ok) {
-                // Try the 'data/' folder if the root folder failed
-                const fallbackResponse = await fetch('data/changelog.json?v=' + Date.now());
-                if (fallbackResponse.ok) {
-                     processData(await fallbackResponse.json(), container);
-                     return;
-                }
-                throw new Error('File not found');
-            }
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    fetch('data/vendors.json')
+      .then(response => {
+        if (!response.ok) throw new Error("HTTP error " + response.status);
+        return response.json();
+      })
+      .then(data => {
+        const tableBody = document.getElementById('benchmark-table-body');
+        tableBody.innerHTML = ''; // Clear loading message
 
-            const data = await response.json();
-            processData(data, container);
-
-        } catch (error) {
-            console.error('Error:', error);
-            container.innerHTML = '<p style="text-align:center; color:#666;">Unable to load updates. (Check console for details)</p>';
-        }
-    }
-
-    function processData(data, container) {
-        container.innerHTML = ''; // Clear "Loading..." message
-
-        if (!data || data.length === 0) {
-            container.innerHTML = '<div class="update-card" style="text-align:center; color:#666;">No recent market changes detected.</div>';
+        if (data.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">No data found in JSON.</td></tr>';
             return;
         }
 
-        // Show the 5 most recent updates
-        data.slice(0, 5).forEach(update => {
-            // Determine styling based on type
-            let colorClass = 'plan-update'; // Default Yellow
-            let icon = '📢';
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            
+            // --- NEW DATA MAPPING MATCHING YOUR SHEET ---
+            // We use bracket notation item["..."] because your headers have spaces
+            const name = item["Name"] || 'Unknown';
+            const plan = item["Plan Name"] || 'Standard';
+            const price = item["Price (₹/mo)"] || '-';
+            const limits = item["Limits (Users etc.)"] || 'Unspecified';
+            const features = item["Key Features"] || '';
+            const website = item["Source URL"] || '#';
+            const updated = item["Last Updated"] || 'Today';
+            // --------------------------------------------
 
-            if (update.type === 'Price Change') {
-                colorClass = 'price-change'; // Red
-                icon = '💰';
-            } else if (update.type === 'New Vendor') {
-                colorClass = 'new-vendor'; // Green
-                icon = '✨';
-            }
-
-            const card = document.createElement('div');
-            card.className = `update-card ${colorClass}`;
-            card.innerHTML = `
-                <div class="update-meta">
-                    <div class="badge">${update.vendor}</div>
-                    <div style="margin-top:0.5rem; font-size:0.8rem; color:#666;">${update.date}</div>
-                </div>
-                <div class="update-content">
-                    <h4>${icon} ${update.type}</h4>
-                    <p>${update.details}</p>
-                </div>
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                        <div class="ml-4">
+                            <div class="text-sm font-medium text-gray-900">
+                                <a href="${website}" target="_blank" class="text-blue-600 hover:text-blue-900 hover:underline">
+                                    ${name}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                        ${plan}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ₹${price}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                    ${limits}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                    ${features}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    ${updated}
+                </td>
             `;
-            container.appendChild(card);
+            tableBody.appendChild(row);
         });
-    }
-
-    // FIX 3: Actually run the function when the page loads
-    document.addEventListener('DOMContentLoaded', loadChangelog);
-  </script>
-</body>
-</html>  
+      })
+      .catch(error => {
+        console.error('Error loading data:', error);
+        document.getElementById('benchmark-table-body').innerHTML = `
+            <tr><td colspan="6" class="px-6 py-4 text-center text-red-500">
+                Error loading data. Check console for details.
+            </td></tr>`;
+      });
+  });
+</script>
