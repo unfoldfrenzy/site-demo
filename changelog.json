@@ -1,0 +1,71 @@
+import json
+from datetime import date
+
+def track_changes(new_data, current_file='vendors.json', history_file='changelog.json'):
+    # 1. Load the OLD data (if it exists)
+    try:
+        with open(current_file, 'r') as f:
+            old_data = json.load(f)
+    except FileNotFoundError:
+        old_data = []
+
+    # Convert list to dict for easier lookup by Vendor Name
+    old_dict = {item['name']: item for item in old_data}
+    
+    changes = []
+    
+    # 2. Compare NEW data against OLD data
+    for new_item in new_data:
+        name = new_item['name']
+        
+        # If this vendor existed before, check for price changes
+        if name in old_dict:
+            old_item = old_dict[name]
+            
+            # Check Price Change
+            if new_item['price'] != old_item['price']:
+                change_entry = {
+                    "date": str(date.today()),
+                    "vendor": name,
+                    "type": "Price Change",
+                    "details": f"Price changed from {old_item['price']} to {new_item['price']}"
+                }
+                changes.append(change_entry)
+                
+            # Check Plan Name Change
+            if new_item['plan'] != old_item['plan']:
+                 change_entry = {
+                    "date": str(date.today()),
+                    "vendor": name,
+                    "type": "Plan Update",
+                    "details": f"Plan renamed from {old_item['plan']} to {new_item['plan']}"
+                }
+                changes.append(change_entry)
+        
+        # If vendor is completely new
+        else:
+            changes.append({
+                "date": str(date.today()),
+                "vendor": name,
+                "type": "New Vendor",
+                "details": "Vendor added to tracking."
+            })
+
+    # 3. Save to changelog.json (Append to top)
+    if changes:
+        try:
+            with open(history_file, 'r') as f:
+                history = json.load(f)
+        except FileNotFoundError:
+            history = []
+            
+        # Add new changes to the START of the list (newest first)
+        updated_history = changes + history
+        
+        with open(history_file, 'w') as f:
+            json.dump(updated_history, f, indent=2)
+            
+        print(f"✅ Logged {len(changes)} changes.")
+        return changes # Return this so you can use it in the newsletter too!
+    
+    return []
