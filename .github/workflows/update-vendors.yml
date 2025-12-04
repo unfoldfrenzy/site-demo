@@ -39,13 +39,16 @@ jobs:
           VENDORS_FILE = 'data/vendors.json'
           CHANGELOG_FILE = 'data/changelog.json'
           
-          # Map CSV headers to clean JSON keys
+          # MAPPING: 'CSV Header Name': 'JSON Key Name'
+          # These MUST match the headers in your Google Sheet Image exactly
           MAPPING = {
-              'Name': 'name',
-              'Website': 'website',
-              'Pricing': 'price',
-              'Description': 'description',
-              'Tags': 'tags'
+              'Name': 'Name',
+              'Plan Name': 'Plan Name',
+              'Price (₹/mo)': 'Price (₹/mo)',
+              'Limits (Users etc.)': 'Limits (Users etc.)',
+              'Key Features': 'Key Features',
+              'Source URL': 'Source URL',
+              'Last Updated': 'Last Updated'
           }
           # ---------------------
 
@@ -70,45 +73,55 @@ jobs:
                   for row in reader:
                       item = {}
                       for csv_key, json_key in MAPPING.items():
+                          # use .strip() to clean accidental spaces in sheet cells
                           item[json_key] = row.get(csv_key, '').strip()
                       
-                      # Only add if it has a name
-                      if item.get('name'):
+                      # Only add if it has a Name
+                      if item.get('Name'):
                           new_vendors.append(item)
           except Exception as e:
               print(f"Error parsing CSV: {e}")
               sys.exit(1)
 
           # 3. COMPARE & TRACK CHANGES
-          # Convert list to dict for fast lookup: {'Gusto': {data}, 'Deel': {data}}
-          old_dict = {item['name']: item for item in old_vendors}
+          # Convert list to dict for fast lookup using the new 'Name' key
+          old_dict = {}
+          for item in old_vendors:
+              if 'Name' in item:
+                  old_dict[item['Name']] = item
+          
           changes = []
           
           for new_item in new_vendors:
-              name = new_item['name']
+              name = new_item['Name']
               
               if name in old_dict:
                   old_item = old_dict[name]
                   
                   # Check Price Change
-                  # Use .get() to avoid crashing if 'price' is missing in old data
-                  if new_item['price'] != old_item.get('price', ''):
+                  # Keys must match the MAPPING above exactly
+                  new_price = new_item.get('Price (₹/mo)', '')
+                  old_price = old_item.get('Price (₹/mo)', '')
+
+                  if new_price != old_price:
                       changes.append({
                           "date": str(date.today()),
                           "vendor": name,
                           "type": "Price Change",
-                          "details": f"Price changed from {old_item.get('price', 'N/A')} to {new_item['price']}"
+                          "details": f"Price changed from {old_price} to {new_price}"
                       })
                   
-                  # Check Feature/Description Update
-                  # Use .get() to avoid crashing if 'description' is missing in old data
-                  if new_item['description'] != old_item.get('description', ''):
-                       changes.append({
-                          "date": str(date.today()),
-                          "vendor": name,
-                          "type": "Plan Update",
-                          "details": "Description/Features updated."
-                      })
+                  # Check Feature Update
+                  new_desc = new_item.get('Key Features', '')
+                  old_desc = old_item.get('Key Features', '')
+
+                  if new_desc != old_desc:
+                        changes.append({
+                           "date": str(date.today()),
+                           "vendor": name,
+                           "type": "Plan Update",
+                           "details": "Key Features updated."
+                       })
               else:
                   # New Vendor Found
                   changes.append({
