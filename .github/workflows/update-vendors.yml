@@ -1,4 +1,4 @@
-name: Update Vendors
+name: Update Vendors & Track Changes
 
 on:
   schedule:
@@ -26,79 +26,135 @@ jobs:
         run: |
           curl -L "$CSV_URL" -o vendors.csv
 
-      - name: Convert to JSON with Mapping
+      - name: Process Data and Log Changes
         shell: python
         run: |
           import csv
           import json
           import sys
           import os
+          from datetime import date
 
-          # --- CONFIGURATION: Map your CSV headers to JSON keys ---
-          # Format: 'CSV Header Name': 'json_key_name'
-          COLUMN_MAPPING = {
+          # --- CONFIGURATION ---
+          VENDORS_FILE = 'data/vendors.json'
+          CHANGELOG_FILE = 'data/changelog.json'
+          
+          # Map CSV headers to clean JSON keys
+          MAPPING = {
               'Name': 'name',
               'Website': 'website',
               'Pricing': 'price',
-              'Description': 'features',   # Mapping Description to Features for now
-              'Tags': 'plan'               # Mapping Tags to Plan for now
+              'Description': 'description',
+              'Tags': 'tags'
           }
-          # --------------------------------------------------------
+          # ---------------------
 
-          items = []
+          # 1. LOAD OLD DATA (Snapshot state before update)
+          old_vendors = []
+          if os.path.exists(VENDORS_FILE):
+              try:
+                  with open(VENDORS_FILE, 'r', encoding='utf-8') as f:
+                      old_vendors = json.load(f)
+              except:
+                  pass
+
+          # 2. PARSE NEW DATA (From CSV)
+          new_vendors = []
+          if not os.path.exists('vendors.csv'):
+              print("Error: CSV not found")
+              sys.exit(1)
+
           try:
-              if not os.path.exists('vendors.csv'):
-                  print("Error: vendors.csv not found")
-                  sys.exit(1)
-
               with open('vendors.csv', 'r', encoding='utf-8') as f:
                   reader = csv.DictReader(f)
                   for row in reader:
-                      # Create a new item with mapped keys
-                      new_item = {}
-                      for csv_header, json_key in COLUMN_MAPPING.items():
-                          # Get value, default to empty string if missing
-                          value = row.get(csv_header, '').strip()
-                          
-                          # Special handling: Convert "Tags" to an array if needed
-                          if json_key == 'features' and ',' in value:
-                              # If you prefer features as a list, uncomment below:
-                              # value = [x.strip() for x in value.split(',')]
-                              pass
-                              
-                          new_item[json_key] = value
+                      item = {}
+                      for csv_key, json_key in MAPPING.items():
+                          item[json_key] = row.get(csv_key, '').strip()
                       
-                      # Add any extra columns (optional)
-                      new_item['last_updated'] = "Today" 
-                      
-                      items.append(new_item)
-                      
+                      # Only add if it has a name
+                      if item.get('name'):
+                          new_vendors.append(item)
           except Exception as e:
-              print(f"Error processing CSV: {e}")
+              print(f"Error parsing CSV: {e}")
               sys.exit(1)
 
-          # Ensure data folder exists
+          # 3. COMPARE & TRACK CHANGES
+          # Convert list to dict for fast lookup: {'Gusto': {data}, 'Deel': {data}}
+          old_dict = {item['name']: item for item in old_vendors}
+          changes = []
+          
+          for new_item in new_vendors:
+              name = new_item['name']
+              
+              if name in old_dict:
+                  old_item = old_dict[name]
+                  
+                  # Check Price Change
+                  if new_item['price'] != old_item['price']:
+                      changes.append({
+                          "date": str(date.today()),
+                          "vendor": name,
+                          "type": "Price Change",
+                          "details": f"Price changed from {old_item['price']} to {new_item['price']}"
+                      })
+                  
+                  # Check Feature/Description Update
+                  if new_item['description'] != old_item['description']:
+                       changes.append({
+                          "date": str(date.today()),
+                          "vendor": name,
+                          "type": "Plan Update",
+                          "details": "Description/Features updated."
+                      })
+              else:
+                  # New Vendor Found
+                  changes.append({
+                      "date": str(date.today()),
+                      "vendor": name,
+                      "type": "New Vendor",
+                      "details": "Vendor added to benchmark."
+                  })
+
+          # 4. SAVE VENDORS (Overwrite with new data)
           if not os.path.exists('data'):
               os.makedirs('data')
+              
+          with open(VENDORS_FILE, 'w', encoding='utf-8') as f:
+              json.dump(new_vendors, f, indent=2)
+          print(f"Saved {len(new_vendors)} vendors.")
 
-          try:
-              with open('data/vendors.json', 'w', encoding='utf-8') as f:
-                  json.dump(items, f, indent=2)
-              print(f"Success! Converted {len(items)} rows.")
-          except Exception as e:
-              print(f"Error saving JSON: {e}")
-              sys.exit(1)
+          # 5. SAVE CHANGELOG (Prepend new changes)
+          if changes:
+              history = []
+              if os.path.exists(CHANGELOG_FILE):
+                  try:
+                      with open(CHANGELOG_FILE, 'r', encoding='utf-8') as f:
+                          history = json.load(f)
+                  except:
+                      pass
+              
+              # Add new changes to the TOP
+              updated_history = changes + history
+              
+              with open(CHANGELOG_FILE, 'w', encoding='utf-8') as f:
+                  json.dump(updated_history, f, indent=2)
+              
+              print(f"✅ Logged {len(changes)} new changes.")
+          else:
+              print("No changes detected.")
 
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           
-          git add data/vendors.json
+          # Add both files
+          git add data/vendors.json data/changelog.json
           
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Update vendor data with correct mapping"
+            git commit -m "Update vendor data and changelog"
             git push
           fi
