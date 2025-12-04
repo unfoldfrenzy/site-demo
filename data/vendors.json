@@ -2,14 +2,14 @@
   {
     "name": "Gusto",
     "website": "https://gusto.com",
-    "price": "$45/mo + $6/person",
+    "price": "$49/mo + $6/person",
     "description": "Modern HR platform for payroll, benefits, and management.",
     "tags": "Payroll, SMB, Benefits"
   },
   {
     "name": "Deel",
     "website": "https://www.deel.com",
-    "price": "Starts at $49/mo",
+    "price": "Starts at $55/mo",
     "description": "Global payroll and compliance for international teams.",
     "tags": "Global, EOR, Contractor"
   },
@@ -44,7 +44,7 @@
   {
     "name": "testpay",
     "website": "",
-    "price": "",
+    "price": "7$/mon",
     "description": "",
     "tags": ""
   }

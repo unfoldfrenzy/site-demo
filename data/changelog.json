@@ -3,6 +3,24 @@
     "date": "2025-12-04",
     "vendor": "Gusto",
     "type": "Price Change",
+    "details": "Price changed from $45/mo + $6/person to $49/mo + $6/person"
+  },
+  {
+    "date": "2025-12-04",
+    "vendor": "Deel",
+    "type": "Price Change",
+    "details": "Price changed from Starts at $49/mo to Starts at $55/mo"
+  },
+  {
+    "date": "2025-12-04",
+    "vendor": "testpay",
+    "type": "Price Change",
+    "details": "Price changed from  to 7$/mon"
+  },
+  {
+    "date": "2025-12-04",
+    "vendor": "Gusto",
+    "type": "Price Change",
     "details": "Price changed from $40/mo + $6/person to $45/mo + $6/person"
   },
   {
