@@ -1,212 +1,47 @@
 [
   {
-    "name": "Keka",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
+    "Name": "Keka",
+    "Plan Name": "Foundation",
+    "Price (₹/mo)": "6,999",
+    "Limits (Users etc.)": "Up to 100 Employees",
+    "Key Features": "Payroll, Leave, Attendance, Mobile App",
+    "Source URL": "https://www.keka.com",
+    "Last Updated": "12/4/2025"
   },
   {
-    "name": "Keka",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
+    "Name": "Zoho Payroll",
+    "Plan Name": "Standard",
+    "Price (₹/mo)": "50/emp",
+    "Limits (Users etc.)": "No Limit",
+    "Key Features": "Auto-payroll, Statutory Compliance, Self-service",
+    "Source URL": "https://www.zoho.com/in/payroll/",
+    "Last Updated": "12/4/2025"
   },
   {
-    "name": "Zoho Payroll",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
+    "Name": "greytHR",
+    "Plan Name": "Starter",
+    "Price (₹/mo)": "3,495",
+    "Limits (Users etc.)": "25 Employees",
+    "Key Features": "Document Management, Core HR, Payroll",
+    "Source URL": "https://www.greythr.com",
+    "Last Updated": "12/4/2025"
   },
   {
-    "name": "Zoho Payroll",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
+    "Name": "FactoHR",
+    "Plan Name": "Enterprise",
+    "Price (₹/mo)": "On Request",
+    "Limits (Users etc.)": "Custom",
+    "Key Features": "Hire-to-Retire, Performance, Travel Expense",
+    "Source URL": "https://factohr.com",
+    "Last Updated": "12/4/2025"
   },
   {
-    "name": "FactoHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "FactoHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "GreytHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "GreytHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Pocket HRMS",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Pocket HRMS",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Keka",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Keka",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Zoho Payroll",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Zoho Payroll",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "FactoHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "FactoHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "GreytHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "GreytHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Pocket HRMS",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Pocket HRMS",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Keka",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Keka",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Zoho Payroll",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Zoho Payroll",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "FactoHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "FactoHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "GreytHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "GreytHR",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Pocket HRMS",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
-  },
-  {
-    "name": "Pocket HRMS",
-    "website": "",
-    "price": "",
-    "description": "",
-    "tags": ""
+    "Name": "Pocket HRMS",
+    "Plan Name": "Professional",
+    "Price (₹/mo)": "2,495",
+    "Limits (Users etc.)": "50 Employees",
+    "Key Features": "AI Chatbot, Biometric Integration, ESS",
+    "Source URL": "https://www.pockethrms.com",
+    "Last Updated": "12/4/2025"
   }
 ]
