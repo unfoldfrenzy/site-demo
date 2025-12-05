@@ -1,5 +1,329 @@
 [
   {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Price Change",
+    "details": "Price changed from 6,999 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Price Change",
+    "details": "Price changed from 6,999 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Price Change",
+    "details": "Price changed from 50/emp to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Price Change",
+    "details": "Price changed from 50/emp to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Price Change",
+    "details": "Price changed from On Request to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Price Change",
+    "details": "Price changed from On Request to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "GreytHR",
+    "type": "New Vendor",
+    "details": "Vendor added to benchmark."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "GreytHR",
+    "type": "New Vendor",
+    "details": "Vendor added to benchmark."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Price Change",
+    "details": "Price changed from 2,495 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Price Change",
+    "details": "Price changed from 2,495 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Price Change",
+    "details": "Price changed from 6,999 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Price Change",
+    "details": "Price changed from 6,999 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Price Change",
+    "details": "Price changed from 50/emp to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Price Change",
+    "details": "Price changed from 50/emp to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Price Change",
+    "details": "Price changed from On Request to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Price Change",
+    "details": "Price changed from On Request to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "GreytHR",
+    "type": "New Vendor",
+    "details": "Vendor added to benchmark."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "GreytHR",
+    "type": "New Vendor",
+    "details": "Vendor added to benchmark."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Price Change",
+    "details": "Price changed from 2,495 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Price Change",
+    "details": "Price changed from 2,495 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Price Change",
+    "details": "Price changed from 6,999 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Price Change",
+    "details": "Price changed from 6,999 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Keka",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Price Change",
+    "details": "Price changed from 50/emp to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Price Change",
+    "details": "Price changed from 50/emp to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Zoho Payroll",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Price Change",
+    "details": "Price changed from On Request to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Price Change",
+    "details": "Price changed from On Request to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "FactoHR",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "GreytHR",
+    "type": "New Vendor",
+    "details": "Vendor added to benchmark."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "GreytHR",
+    "type": "New Vendor",
+    "details": "Vendor added to benchmark."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Price Change",
+    "details": "Price changed from 2,495 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Price Change",
+    "details": "Price changed from 2,495 to "
+  },
+  {
+    "date": "2025-12-05",
+    "vendor": "Pocket HRMS",
+    "type": "Plan Update",
+    "details": "Key Features updated."
+  },
+  {
     "date": "2025-12-04",
     "vendor": "Keka",
     "type": "New Vendor",

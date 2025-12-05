@@ -1,47 +1,272 @@
 [
   {
     "Name": "Keka",
-    "Plan Name": "Foundation",
-    "Price (₹/mo)": "6,999",
-    "Limits (Users etc.)": "Up to 100 Employees",
-    "Key Features": "Payroll, Leave, Attendance, Mobile App",
-    "Source URL": "https://www.keka.com",
-    "Last Updated": "12/4/2025"
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.keka.com/pricing",
+    "Last Updated": "0b5VX5yfOJIrCS64gD66rA=="
+  },
+  {
+    "Name": "Keka",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://www.keka.com/features",
+    "Last Updated": ""
   },
   {
     "Name": "Zoho Payroll",
-    "Plan Name": "Standard",
-    "Price (₹/mo)": "50/emp",
-    "Limits (Users etc.)": "No Limit",
-    "Key Features": "Auto-payroll, Statutory Compliance, Self-service",
-    "Source URL": "https://www.zoho.com/in/payroll/",
-    "Last Updated": "12/4/2025"
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.zoho.com/in/payroll/pricing/",
+    "Last Updated": "w41cUmw8Mxh6dm0vin0zFA=="
   },
   {
-    "Name": "greytHR",
-    "Plan Name": "Starter",
-    "Price (₹/mo)": "3,495",
-    "Limits (Users etc.)": "25 Employees",
-    "Key Features": "Document Management, Core HR, Payroll",
-    "Source URL": "https://www.greythr.com",
-    "Last Updated": "12/4/2025"
+    "Name": "Zoho Payroll",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://www.zoho.com/in/payroll/features/",
+    "Last Updated": ""
   },
   {
     "Name": "FactoHR",
-    "Plan Name": "Enterprise",
-    "Price (₹/mo)": "On Request",
-    "Limits (Users etc.)": "Custom",
-    "Key Features": "Hire-to-Retire, Performance, Travel Expense",
-    "Source URL": "https://factohr.com",
-    "Last Updated": "12/4/2025"
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://factohr.com/pricing/",
+    "Last Updated": "rRYBoNbJevWAWJdupeLRgA=="
+  },
+  {
+    "Name": "FactoHR",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://factohr.com/features/",
+    "Last Updated": ""
+  },
+  {
+    "Name": "GreytHR",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.greythr.com/pricing/",
+    "Last Updated": "#ERROR!"
+  },
+  {
+    "Name": "GreytHR",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.greythr.com/features/",
+    "Last Updated": "Ox2lLLgkAy66bRlrRPWaYg=="
   },
   {
     "Name": "Pocket HRMS",
-    "Plan Name": "Professional",
-    "Price (₹/mo)": "2,495",
-    "Limits (Users etc.)": "50 Employees",
-    "Key Features": "AI Chatbot, Biometric Integration, ESS",
-    "Source URL": "https://www.pockethrms.com",
-    "Last Updated": "12/4/2025"
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.pockethrms.com/pricing/",
+    "Last Updated": "Pfpk3TLmBfrx4iqv3ZGRoQ=="
+  },
+  {
+    "Name": "Pocket HRMS",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://www.pockethrms.com/features/",
+    "Last Updated": ""
+  },
+  {
+    "Name": "Keka",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.keka.com/pricing",
+    "Last Updated": "0b5VX5yfOJIrCS64gD66rA=="
+  },
+  {
+    "Name": "Keka",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://www.keka.com/features",
+    "Last Updated": ""
+  },
+  {
+    "Name": "Zoho Payroll",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.zoho.com/in/payroll/pricing/",
+    "Last Updated": "w41cUmw8Mxh6dm0vin0zFA=="
+  },
+  {
+    "Name": "Zoho Payroll",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://www.zoho.com/in/payroll/features/",
+    "Last Updated": ""
+  },
+  {
+    "Name": "FactoHR",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://factohr.com/pricing/",
+    "Last Updated": "rRYBoNbJevWAWJdupeLRgA=="
+  },
+  {
+    "Name": "FactoHR",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://factohr.com/features/",
+    "Last Updated": ""
+  },
+  {
+    "Name": "GreytHR",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.greythr.com/pricing/",
+    "Last Updated": "#ERROR!"
+  },
+  {
+    "Name": "GreytHR",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.greythr.com/features/",
+    "Last Updated": "Ox2lLLgkAy66bRlrRPWaYg=="
+  },
+  {
+    "Name": "Pocket HRMS",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.pockethrms.com/pricing/",
+    "Last Updated": "Pfpk3TLmBfrx4iqv3ZGRoQ=="
+  },
+  {
+    "Name": "Pocket HRMS",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://www.pockethrms.com/features/",
+    "Last Updated": ""
+  },
+  {
+    "Name": "Keka",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.keka.com/pricing",
+    "Last Updated": "0b5VX5yfOJIrCS64gD66rA=="
+  },
+  {
+    "Name": "Keka",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://www.keka.com/features",
+    "Last Updated": ""
+  },
+  {
+    "Name": "Zoho Payroll",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.zoho.com/in/payroll/pricing/",
+    "Last Updated": "w41cUmw8Mxh6dm0vin0zFA=="
+  },
+  {
+    "Name": "Zoho Payroll",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://www.zoho.com/in/payroll/features/",
+    "Last Updated": ""
+  },
+  {
+    "Name": "FactoHR",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://factohr.com/pricing/",
+    "Last Updated": "rRYBoNbJevWAWJdupeLRgA=="
+  },
+  {
+    "Name": "FactoHR",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://factohr.com/features/",
+    "Last Updated": ""
+  },
+  {
+    "Name": "GreytHR",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.greythr.com/pricing/",
+    "Last Updated": "#ERROR!"
+  },
+  {
+    "Name": "GreytHR",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.greythr.com/features/",
+    "Last Updated": "Ox2lLLgkAy66bRlrRPWaYg=="
+  },
+  {
+    "Name": "Pocket HRMS",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "",
+    "Source URL": "https://www.pockethrms.com/pricing/",
+    "Last Updated": "Pfpk3TLmBfrx4iqv3ZGRoQ=="
+  },
+  {
+    "Name": "Pocket HRMS",
+    "Plan Name": "",
+    "Price (\u20b9/mo)": "",
+    "Limits (Users etc.)": "",
+    "Key Features": "ERROR",
+    "Source URL": "https://www.pockethrms.com/features/",
+    "Last Updated": ""
   }
 ]
