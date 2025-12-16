@@ -1,16 +1,1 @@
-[
-  {
-    "Name": "Vendor Name",
-    "Website": "https://example.com",
-    "Pricing": "$X/month",
-    "Description": "Detailed description of features",
-    "Tags": "Tag or category"
-  },
-  {
-    "Name": "Another Vendor",
-    "Website": "https://another. com",
-    "Pricing":  "$Y/month",
-    "Description": "Another vendor description",
-    "Tags": "Another tag"
-  }
-]
+[]
