@@ -1,18 +1,16 @@
 [
   {
-    "vendor": "Vendor Name 1",
-    "plan": "Plan Name",
-    "price": "$X/month",
-    "limits": "Limit details",
-    "features": "Feature list",
-    "lastUpdated": "2025-12-16"
+    "Name": "Vendor Name",
+    "Website": "https://example.com",
+    "Pricing": "$X/month",
+    "Description": "Detailed description of features",
+    "Tags": "Tag or category"
   },
   {
-    "vendor": "Vendor Name 2",
-    "plan": "Plan Name",
-    "price":  "$Y/month",
-    "limits": "Limit details",
-    "features": "Feature list",
-    "lastUpdated": "2025-12-16"
+    "Name": "Another Vendor",
+    "Website": "https://another. com",
+    "Pricing":  "$Y/month",
+    "Description": "Another vendor description",
+    "Tags": "Another tag"
   }
 ]
